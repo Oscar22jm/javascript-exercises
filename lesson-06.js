@@ -1,5 +1,3 @@
-'use strict';
-
 // Lesson 06 exercise: Arrays and loops
 // In your exercise repository, create a branch named `lesson-06-exercise` and switch to it,
 // then open `lesson-06.js`. The questions wait as comments, and the file begins with the
@@ -9,16 +7,43 @@
 // Build an array of at least five menu item names. Log the whole array, the first item, the
 // last item read through `length` minus 1, and the array's length.
 
+let Items = ["Croissant", "Berliner", "Frenchi", "Olive", "Pasta"];
+
+console.log(Items);
+console.log(Items[0]);
+console.log(Items[menuItems.length - 1]);
+console.log(Items.length);
 
 // TODO: Part two.
 // Grow and shrink the menu with one `push`, one `unshift`, one `pop`, and one `shift`, logging
 // the array after each step, and note in a comment which end of the array each method touched.
 
+let Items = ["Croissant", "Berliner", "Frenchi", "Olive", "Pasta"];
+
+menuItems.push("Tacos");
+console.log(Items);
+
+menuItems.unshift("Soup");
+console.log(Items);
+
+menuItems.pop();
+console.log(Items);
+
+menuItems.shift();
+console.log(Items);
 
 // TODO: Part three.
 // Print every menu item twice, first with a counting `for` loop that uses the index, then with
 // a `for...of` loop, and add a one-line comment on when you would choose each form.
 
+let Items = ["Croissant", "Berliner", "Frenchi", "Olive", "Pasta"];
+
+for (let i = 0; i < menuItems.length; i++) {
+  console.log(Items[i]);
+}
+for (let item of Items) {
+  console.log(item);
+}
 
 // TODO: Part four.
 // Using the provided prices array, build display strings with `map`, keep the items under five
@@ -29,6 +54,25 @@
 // * The provided prices:
 const prices = [4.5, 12, 3.2, 8];
 
+const displayPrices = prices.map(function (price) {
+  return price + " euros";
+});
+console.log(displayPrices);
+
+const underFive = prices.filter(function (price) {
+  return price < 5;
+});
+console.log(underFive);
+
+const overTen = prices.find(function (price) {
+  return price > 10;
+});
+console.log(overTen);
+
+prices.forEach(function (price) {
+  return price + " euros";
+});
+// This forEach return undefined, it loops through the array but does not create a new array with the results.
 
 // TODO: Part five.
 // Loop over the provided artists array and log a two-line card for each artist using template
@@ -36,14 +80,40 @@ const prices = [4.5, 12, 3.2, 8];
 // noting in a comment what you did not have to change.
 
 // * The provided artists:
-const artists = ["Pinkfong", "Adriano Celentano", "Asake", "Miyagi and Andy Panda", "Johnny Cash"];
+const artists = [
+  "Pinkfong",
+  "Adriano Celentano",
+  "Asake",
+  "Miyagi and Andy Panda",
+  "Johnny Cash",
+  "Metallica",
+];
 
+for (let artist of artists) {
+  console.log(`Artist: ${artist}`);
+  console.log(`Is the best ${artist}!`); //IT was not necessary to change the array eather the variable const
+}
 
 // TODO: Part six.
 // Assign the menu to a second variable, push a new item through the second name, and log both
 // variables to demonstrate the shared reference. Then create a spread copy, change the copy,
 // and log both lengths to prove the original survived.
 
+let Items = ["Croissant", "Berliner", "Frenchi", "Olive", "Pasta"];
+
+let secondItem = Items;
+
+secondItems.push("Hamburger");
+
+console.log(Items);
+console.log(secondItem);
+
+let copyItems = [...Items];
+
+copyItems.push("Burger");
+
+console.log(Items.length);
+console.log(copyItems.length);
 
 // TODO: Part seven.
 // The counting classics. Implement FizzBuzz in full: loop from 1 to 100, printing Fizz for
@@ -54,6 +124,33 @@ const artists = ["Pinkfong", "Adriano Celentano", "Asake", "Miyagi and Andy Pand
 // * The provided numbers for the sum and the largest:
 const numbers = [12, 5, 41, 8, 33, 2, 27];
 
+for (let i = 1; i <= 100; i++) {
+  if (i % 3 === 0 && i % 5 === 0) {
+    console.log("FizzBuzz");
+  } else if (i % 3 === 0) {
+    console.log("Fizz");
+  } else if (i % 5 === 0) {
+    console.log("Buzz");
+  } else {
+    console.log(i);
+  }
+}
+
+const numbers = [12, 5, 41, 8, 33, 2, 27];
+let sum = 0;
+
+for (let i = 0; i < numbers.length; i++) {
+  sum = sum + numbers[i];
+}
+console.log("Sum:", sum);
+
+let largest = numbers[0];
+for (let i = 1; i < numbers.length; i++) {
+  if (numbers[i] > largest) {
+    largest = numbers[i];
+  }
+}
+console.log("Largest:", largest);
 
 // TODO: Part eight.
 // The string classics that waited for loops. Reverse a string with a loop that walks it
@@ -61,6 +158,40 @@ const numbers = [12, 5, 41, 8, 33, 2, 27];
 // stretch, use your reverser to build a palindrome check, and test it on three words, ignoring
 // case with `toLowerCase`.
 
+let word = "Hello new big world";
+let reversed = "";
+
+for (let i = word.length - 1; i >= 0; i--) {
+  reversed = reversed + word[i];
+}
+console.log("Reversed:", reversed);
+
+let vowels = ["la", "le", "li", "lo", "lu"];
+let count = 0;
+
+for (let i = 0; i < word.length; i++) {
+  if (vowels.includes(word[i].toLowerCase())) {
+    count++;
+  }
+}
+console.log("Testing the leleters :", count);
+
+function palindromeCheck(word) {
+  let lowerWord = word.toLowerCase();
+  let reversedWord = "";
+
+  for (let i = lowerWord.length - 1; i >= 0; i--) {
+    reversedWord = reversedWord + lowerWord[i];
+  }
+  if (lowerWord == reversedWord) {
+    return true;
+  } else {
+    return false;
+  }
+}
+console.log(palindromeCheck("Level"));
+console.log(palindromeCheck("Hello"));
+console.log(palindromeCheck("Radar"));
 
 // TODO: Save deliberately, commit with a clear message, push the branch, and open a pull request
 // into main.
